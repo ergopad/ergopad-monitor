@@ -1,0 +1,2 @@
+# ergopad-monitor
+pgadmin, flower

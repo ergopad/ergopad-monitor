@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  pgadmin:
+    container_name: pgadmin
+    env_file: app/.env
+    image: dpage/pgadmin4
+    ports: 
+      - ${PGADMIN_LISTEN_PORT}:80
+    networks:
+      - ergopad-data_net
+
+  flower:  
+    container_name: flower
+    env_file: app/.env
+    image: mher/flower
+    ports: 
+      - ${FLOWER_PORT}:${FLOWER_PORT}
+    command: celery flower --broker=redis://redis:${REDIS_PORT}/0 --port=${FLOWER_PORT}
+    networks:
+      - ergopad-data_net
+
+networks:
+  ergopad-data_net:
+    external: true
