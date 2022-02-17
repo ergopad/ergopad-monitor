@@ -16,7 +16,7 @@ services:
     image: mher/flower
     ports: 
       - ${FLOWER_PORT}:${FLOWER_PORT}
-    command: celery flower --broker=redis://redis:${REDIS_PORT}/0 --port=${FLOWER_PORT}
+    command: celery --broker=redis://redis:${REDIS_PORT}/0 flower --port=${FLOWER_PORT}
     networks:
       - ergopad-data_net
 
