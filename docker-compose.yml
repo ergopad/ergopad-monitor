@@ -4,7 +4,7 @@ services:
   pgadmin:
     container_name: pgadmin
     env_file: ${ENV_FILE}
-    image: dpage/pgadmin4:6.9
+    image: dpage/pgadmin4:latest
     volumes:
       - /backups:/backups
     ports: 
