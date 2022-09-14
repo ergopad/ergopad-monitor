@@ -4,27 +4,26 @@ services:
   pgadmin:
     container_name: pgadmin
     env_file: ${ENV_FILE}
-    image: dpage/pgadmin4:latest
+    restart: unless-stopped
+    image: dpage/pgadmin4:6.9
     volumes:
       - /backups:/backups
     ports: 
       - ${PGADMIN_LISTEN_PORT}:80
     networks:
-      - ergopad-data_net
       - ergopad-net
 
   flower:  
     container_name: flower
     env_file: ${ENV_FILE}
+    restart: unless-stopped
     image: mher/flower
     ports: 
       - ${FLOWER_PORT}:${FLOWER_PORT}
     command: celery --broker=redis://redis:${REDIS_PORT}/0 flower --port=${FLOWER_PORT}
     networks:
-      - ergopad-data_net
+      - ergopad-net
 
 networks:
-  ergopad-data_net:
-    external: true
   ergopad-net:
     external: true
