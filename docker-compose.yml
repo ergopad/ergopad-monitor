@@ -4,8 +4,8 @@ services:
   pgadmin:
     container_name: pgadmin
     env_file: ${ENV_FILE}
-    restart: unless-stopped
-    image: dpage/pgadmin4:6.9
+    restart: always
+    image: dpage/pgadmin4:latest
     volumes:
       - /backups:/backups
     ports: 
@@ -16,7 +16,7 @@ services:
   flower:  
     container_name: flower
     env_file: ${ENV_FILE}
-    restart: unless-stopped
+    restart: always
     image: mher/flower
     ports: 
       - ${FLOWER_PORT}:${FLOWER_PORT}
